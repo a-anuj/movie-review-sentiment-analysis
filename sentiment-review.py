@@ -20,11 +20,9 @@ import streamlit as st
 
 
 df = pd.read_csv("IMDB Dataset.csv")
-print(df.head())
 
 lable_encoder = LabelEncoder()
 y_train = lable_encoder.fit_transform(df["sentiment"])
-print(y_train[:10])
 
 vec = CountVectorizer(max_features=5000, stop_words='english')
 x_train = vec.fit_transform(df["review"]).toarray()
