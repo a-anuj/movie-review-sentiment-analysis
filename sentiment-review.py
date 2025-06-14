@@ -46,17 +46,20 @@ model.compile(
 model.fit(x_train,y_train,epochs=5)
 
 
-x_test = ["I will say it as a boring movie of all time "]
-x_test_vec = vec.transform(x_test).toarray()
-print(x_test_vec)
 
 
 
+st.title("Movie Review Sentiment Classifier")
+with st.form("review-classifier"):
+    review = st.text_input("Enter the review ")
+    submit = st.form_submit_button("Submit")
+    if submit:
+        st.success("Submitted Succesfully !")
+        x_test = [review]
+        x_test_vec = vec.transform(x_test).toarray()
+        prediction = model.predict(x_test_vec)
 
-
-prediction = model.predict(x_test_vec)
-print(prediction)
-
-
-
-
+        if prediction[0][0] >= 0.5:
+            st.write("Postivie Review")
+        else:
+            st.write("Negative Review")
